@@ -16,7 +16,7 @@ export class TodoComponent implements OnInit {
     selectedTodo: TodoModel;
     isFormShow: boolean;
     sortBy: { name: string, order: OrderBy };
-    constructor(private _router: Router, private cdr: ChangeDetectorRef, private _todoService: TodoService) { }
+    constructor(private _todoService: TodoService) { }
 
     ngOnInit(): void {
         this.cols = GenericService.getColsByWindowWidth(window.innerWidth);

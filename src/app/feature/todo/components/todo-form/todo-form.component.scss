@@ -1,0 +1,20 @@
+.field-title,.field-content {
+    width:100%;
+}
+.field-category {
+    width: calc(50% - 16px);
+}
+.field-status,.field-progress {
+    width: calc(25% - 16px);
+}
+.field-category,.field-status {
+    padding-right: 16px;
+}
+.mat-card {
+    .mat-card-actions {
+        margin-top: 16px;
+        &.footer-actions {
+            margin-bottom: 0;
+        }
+    }
+}

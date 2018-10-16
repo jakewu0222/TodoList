@@ -86,11 +86,9 @@ a {
         color: $primary-color;
     }
 }
-.container {
-    width: 90%;
-    margin: 0 auto;
+.link-active {
+    color: $primary-color;
 }
-
 .list-card {
     width: 100%;
     height: calc(100% - 48px);

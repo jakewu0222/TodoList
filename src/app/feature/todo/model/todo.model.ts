@@ -18,3 +18,18 @@ export class TodoModel {
         this.userId = todo.userId || 'jake.wu';
     }
 }
+
+export const TODO_STATUS_CONST = [
+    {
+        code: 0,
+        display: 'Ready'
+    },
+    {
+        code: 1,
+        display: 'Progressing'
+    },
+    {
+        code: 2,
+        display: 'Done'
+    }
+];

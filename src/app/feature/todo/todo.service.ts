@@ -3,7 +3,7 @@ import { GenericService } from 'src/app/core/service/generic.service';
 import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/operators';
 import { HttpService } from 'src/app/core/service/http.service';
-import { TodoModel } from './model/todo.model';
+import { TodoModel, TODO_STATUS_CONST } from './model/todo.model';
 import { API } from 'src/app/core/model/api-model';
 
 @Injectable({
