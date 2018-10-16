@@ -11,6 +11,21 @@ export class DashboardComponent implements OnInit {
     constructor() { }
 
     ngOnInit() {
-        this.dashboardList = [];
+        this.dashboardList = [
+            {
+                title: 'Todo',
+                itemList: [
+                    {
+                        title: 'todo list',
+                        progress: 50
+                    },
+                    {
+                        title: 'todo add & edit',
+                        progress: 70
+                    }
+                ],
+                link: '/todo'
+            }
+        ];
     }
 }

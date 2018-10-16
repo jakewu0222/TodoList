@@ -1,0 +1,16 @@
+.todo-form {
+    transition: height .5s ease, opacity .3s ease-out;
+    height: 0;
+    opacity: 0;
+    &.active {
+        height: 328px;
+        opacity: 1;
+    }
+}
+.todo-status {
+    margin-right: 16px;
+}
+.todo-progress {
+    width: calc(75% - 16px);
+    display: inline-block;
+}

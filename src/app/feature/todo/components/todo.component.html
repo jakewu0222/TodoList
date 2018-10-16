@@ -1,0 +1,68 @@
+<div class="container">
+    <mat-grid-list class="title-grid" cols="4" rowHeight="50px" gutterSize="16px">
+        <mat-grid-tile class="title-tile" colspan="3">
+            <a [routerLink]="'/home'" class="link">Home</a>
+            <mat-icon>chevron_right</mat-icon>
+            <span>Todo list</span>
+        </mat-grid-tile>
+        <mat-grid-tile class="action-tile" colspan="1">
+            <button class="align-fix-top" mat-button (click)="showForm()" [disabled]="isFormShow">Add a new todo</button>
+        </mat-grid-tile>
+    </mat-grid-list>
+    <mat-grid-list cols="6" rowHeight="32px" gutterSize="16px">
+        <mat-grid-tile>
+        </mat-grid-tile>
+        <mat-grid-tile>
+        </mat-grid-tile>
+        <mat-grid-tile>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <button mat-button [class.selected]="sortBy.name==='modifiedAt'" (click)="changeSort('modifiedAt')">modified
+                time
+                <mat-icon>swap_vert</mat-icon>
+            </button>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <button mat-button [class.selected]="sortBy.name==='createAt'" (click)="changeSort('createAt')">creation
+                time
+                <mat-icon>swap_vert</mat-icon>
+            </button>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <button mat-button [class.selected]="sortBy.name==='progress'" (click)="changeSort('progress')">progress
+                <mat-icon>swap_vert</mat-icon>
+            </button>
+        </mat-grid-tile>
+    </mat-grid-list>
+    <div class="todo-form" [class.active]="isFormShow">
+        <!-- <app-todo-form [todo]="selectedTodo" (doAction)="onAction($event)"></app-todo-form> -->
+    </div>
+    <mat-grid-list [cols]="cols" gutterSize="24px" *ngIf="todoList.length > 0" (window:resize)="onResize($event)">
+        <mat-grid-tile *ngFor="let todo of todoList">
+            <mat-card class="list-card">
+                <mat-card-header>
+                    <mat-card-title>{{ todo.title }}</mat-card-title>
+                    <mat-card-subtitle>{{ todo.category }}</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    <span class="todo-status">
+                        <ng-container *ngIf="todo.status === 1">
+                            {{todo.progress}}%
+                        </ng-container>
+                        <ng-container *ngIf="todo.status !== 1">
+                            <!-- {{todo.status | status}} -->
+                            {{todo.status}}
+                        </ng-container>
+                    </span>
+                    <mat-progress-bar class="todo-progress" [color]="'primary'" [mode]="'determinate'" [value]="todo.progress">
+                    </mat-progress-bar>
+                    <p>{{ todo.content }}</p>
+                </mat-card-content>
+                <mat-card-actions align="end">
+                    <button mat-button (click)="showForm(todo)" [disabled]="isFormShow">EDIT</button>
+                    <button mat-button color="warn" (click)="doDelete(todo.id)" [disabled]="isFormShow">DELETE</button>
+                </mat-card-actions>
+            </mat-card>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>

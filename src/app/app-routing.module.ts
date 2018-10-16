@@ -12,6 +12,10 @@ const routes: Routes = [
         path: 'home',
         loadChildren: './feature/dashboard/dashboard.module#DashboardModule'
     },
+    {
+        path: 'todo',
+        loadChildren: './feature/todo/todo.module#TodoModule'
+    }
 ];
 
 @NgModule({
