@@ -3,7 +3,7 @@ import { GenericService } from 'src/app/core/service/generic.service';
 import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/operators';
 import { HttpService } from 'src/app/core/service/http.service';
-import { TodoModel, TODO_STATUS_CONST } from './model/todo.model';
+import { TodoModel } from './model/todo.model';
 import { API } from 'src/app/core/model/api-model';
 
 @Injectable({
@@ -13,7 +13,7 @@ export class TodoService {
     constructor(
         private _httpSvc: HttpService
     ) { }
-    public getTodoList(todoFilter?: any): Observable<Array<TodoModel>> {
+    public getTodoList(): Observable<Array<TodoModel>> {
         return this._httpSvc.getCollection<TodoModel>(API.todo.url).pipe(map(todoList => {
             todoList.map(todo => {
                 todo.createAt = GenericService.timestampToDate(todo.createAt);
