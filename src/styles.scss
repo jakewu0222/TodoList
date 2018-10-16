@@ -5,12 +5,21 @@
 /* angular material default setting */
 html,
 body {
-  height: 100%;
+    height: 100%;
 }
 body {
-  margin: 0;
-  font-family: 'Roboto', sans-serif;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
 }
+/**/
+
+/* variable */
+$dark: #212121;
+$light-dark: #424242;
+$lighter-dark: #646464;
+$text-dark: #292929;
+$text-color: whitesmoke;
+$primary-color: #0288d1;
 /**/
 
 /* theming */
@@ -18,8 +27,79 @@ $primary: mat-palette($mat-light-blue, 700);
 $accent: mat-palette($mat-green, 700);
 $warn: mat-palette($mat-red, 700);
 $dark-theme: mat-dark-theme($primary, $accent, $warn);
-/**/
-
 .mat-app-background {
     @include angular-material-theme($dark-theme);
+}
+/**/
+
+/* basic elements*/
+html {
+    color: $text-color !important;
+    font-family: 'Roboto', 'Helvetica Neue', 'sans-serif';
+}
+body {
+    margin: 0;
+    background-color: $dark;
+}
+.align-fix-top {
+    top: 5px;
+}
+a {
+    color: $text-color;
+    text-decoration: none;
+    &.link:hover {
+        text-decoration: underline;
+    }
+}
+/**/
+
+/* shared style */
+.container {
+    width: 80%;
+    margin: 0 auto;
+    @media only screen and (max-width: 1024px) {
+        width: 90%;
+    }
+}
+.mat-grid-list {
+    margin-bottom: 16px;
+}
+.title-grid {
+    margin: 24px 0;
+}
+.title-tile {
+    /deep/ .mat-figure {
+        font-size: 24px;
+        justify-content: flex-start !important;
+    }
+    .mat-icon {
+        line-height: 1.1;
+    }
+}
+.action-tile {
+    /deep/ .mat-figure {
+        justify-content: flex-end !important;
+    }
+}
+.mat-button {
+    &.selected {
+        color: $primary-color;
+    }
+}
+.container {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.list-card {
+    width: 100%;
+    height: calc(100% - 48px);
+    /deep/ .mat-card-header-text {
+        margin: 0;
+    }
+    .mat-card-actions {
+        position: absolute;
+        bottom: 24px;
+        right: 24px;
+    }
 }

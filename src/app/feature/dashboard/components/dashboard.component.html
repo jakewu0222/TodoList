@@ -1,0 +1,22 @@
+<div class="container">
+    <mat-grid-list class="title-grid" cols="4" rowHeight="50px" gutterSize="16px">
+        <mat-grid-tile class="title-tile" colspan="3">
+            <span>Home</span>
+        </mat-grid-tile>
+    </mat-grid-list>
+    <mat-grid-list cols="4" gutterSize="24px" *ngIf="dashboardList.length > 0">
+        <mat-grid-tile *ngFor="let dashboard of dashboardList">
+            <mat-card class="list-card">
+                <mat-card-header>
+                    <mat-card-title>{{ dashboard.title }}</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <p *ngFor="let item of dashboard.itemList">{{item.title}}...{{item.progress}}%</p>
+                </mat-card-content>
+                <mat-card-actions *ngIf="dashboard.link" align="end">
+                    <a mat-button [routerLink]="dashboard.link">GO</a>
+                </mat-card-actions>
+            </mat-card>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>
