@@ -13,11 +13,7 @@
         <app-todo-form [todo]="selectedTodo" (doAction)="onAction($event)"></app-todo-form>
     </div>
     <mat-grid-list cols="6" rowHeight="32px" gutterSize="16px">
-        <mat-grid-tile>
-        </mat-grid-tile>
-        <mat-grid-tile>
-        </mat-grid-tile>
-        <mat-grid-tile>
+        <mat-grid-tile colspan="3">
         </mat-grid-tile>
         <mat-grid-tile>
             <button mat-button [class.selected]="sortBy.name==='modifiedAt'" (click)="changeSort('modifiedAt')">
@@ -57,7 +53,7 @@
                 </mat-card-content>
                 <mat-card-actions align="end">
                     <button mat-button (click)="showForm(todo)" [disabled]="isFormShow">EDIT</button>
-                    <button mat-button color="warn" (click)="doDelete(todo.id)" [disabled]="isFormShow">DELETE</button>
+                    <button mat-button color="warn" (click)="doDelete(todo)" [disabled]="isFormShow">DELETE</button>
                 </mat-card-actions>
             </mat-card>
         </mat-grid-tile>

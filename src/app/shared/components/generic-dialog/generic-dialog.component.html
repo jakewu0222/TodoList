@@ -1,0 +1,6 @@
+<h2 mat-dialog-title>{{ data.title }}</h2>
+<mat-dialog-content class="dialog-content">{{ data.content }}</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button [disabled]="saving" [color]="btn.color" [ngClass]="btn.class" (click)="btn.click()" *ngFor="let btn of data.buttons">{{
+        btn.text }}</button>
+</mat-dialog-actions>

@@ -1,9 +1,10 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { GenericService } from 'src/app/core/service/generic.service';
 import { TodoService } from '../todo.service';
-import { Router } from '@angular/router';
 import { TodoModel } from '../model/todo.model';
 import { OrderBy } from 'src/app/shared/model/shared-model';
+import { MatDialog } from '@angular/material';
+import { GenericDialogComponent } from 'src/app/shared/components/generic-dialog/generic-dialog.component';
 
 @Component({
     selector: 'app-todo',
@@ -16,7 +17,11 @@ export class TodoComponent implements OnInit {
     selectedTodo: TodoModel;
     isFormShow: boolean;
     sortBy: { name: string, order: OrderBy };
-    constructor(private _todoService: TodoService) { }
+    constructor(
+        private _todoService: TodoService,
+        private _dialog: MatDialog
+    ) {
+    }
 
     ngOnInit(): void {
         this.cols = GenericService.getColsByWindowWidth(window.innerWidth);
@@ -56,8 +61,52 @@ export class TodoComponent implements OnInit {
         this.isFormShow = true;
     }
 
-    public doDelete(id: string): void {
-        this._todoService.deleteTodo(id).subscribe(r => { });
+    public doDelete(todo: TodoModel): void {
+        const dialogRef = this._dialog.open(GenericDialogComponent,
+            {
+                width: '480px',
+                data: {
+                    title: 'Confirm to delete this todo?',
+                    content: `todo title "${todo.title}"`,
+                    buttons: [
+                        {
+                            text: 'CANCEL',
+                            click: () => dialogRef.close()
+                        },
+                        {
+                            text: 'CONFIRM',
+                            color: 'warn',
+                            click: () => {
+                                dialogRef.componentInstance.saving = true;
+                                this._todoService.deleteTodo(todo.id).subscribe(r => {
+                                    dialogRef.componentInstance.saving = false;
+                                    dialogRef.close();
+                                }, err => this.onDeleteFail(todo));
+                            }
+                        }
+                    ]
+                }
+            }
+        );
+    }
+
+    private onDeleteFail(todo: TodoModel) {
+        const dialogRef = this._dialog.open(GenericDialogComponent,
+            {
+                width: '320px',
+                data: {
+                    title: 'Delete fail',
+                    content: `todo title "${todo.title}"`,
+                    buttons: [
+                        {
+                            text: 'OK',
+                            color: 'warn',
+                            click: () => this._dialog.closeAll()
+                        }
+                    ]
+                }
+            }
+        );
     }
 
     public onAction(event: { action: string, data: TodoModel }): void {
