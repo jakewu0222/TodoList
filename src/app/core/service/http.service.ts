@@ -21,6 +21,7 @@ export class HttpService {
      * firestore
      * @param url
      */
+
     public getCollection<T>(url: string): Observable<Array<T>> {
         return this._db.collection<T>(url).valueChanges();
     }
@@ -29,13 +30,16 @@ export class HttpService {
         return this._db.doc<T>(url).valueChanges();
     }
 
-    public upsertDoc<T>(url: string, id: string, data: T): Observable<any> {
+    public upsertDoc<T>(url: string, data: any): Observable<any> {
+        if (!data.id) {
+            data.id = this._db.createId();
+        }
         const obj = this.convertToObject(data);
-        return from(this._db.collection(url).doc(id).set(obj));
+        return from(this._db.collection(url).doc(data.id).set(obj));
     }
 
-    public deleteDoc<T>(url: string): Observable<void> {
-        return from(this._db.doc(url).delete());
+    public deleteDoc<T>(url: string, id: string): Observable<void> {
+        return from(this._db.collection(url).doc(id).delete());
     }
 
     private convertToObject(data: any): Object {

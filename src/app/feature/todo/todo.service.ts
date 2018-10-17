@@ -24,18 +24,17 @@ export class TodoService {
     }
 
     public addTodo(todo: TodoModel): void {
-        todo.id = GenericService.generateGUID();
         todo.createAt = new Date();
         todo.modifiedAt = new Date();
-        this._httpSvc.upsertDoc(API.todo.url, todo.id, todo);
+        this._httpSvc.upsertDoc(API.todo.url, todo);
     }
 
     public updateTodo(todo: TodoModel): void {
         todo.modifiedAt = new Date();
-        this._httpSvc.upsertDoc(API.todo.url, todo.id, todo);
+        this._httpSvc.upsertDoc(API.todo.url, todo);
     }
 
     public deleteTodo(id: string): any {
-        return this._httpSvc.deleteDoc(API.todo.id(id).url);
+        return this._httpSvc.deleteDoc(API.todo.url, id);
     }
 }

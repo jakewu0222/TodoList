@@ -4,14 +4,14 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
-import { FIREBASE_CONFIG } from './model/api-model';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
     imports: [
         BrowserAnimationsModule,
         CommonModule,
         HttpClientModule,
-        AngularFireModule.initializeApp(FIREBASE_CONFIG),
+        AngularFireModule.initializeApp(environment.firebaseConfig),
         AngularFirestoreModule
     ],
     declarations: [

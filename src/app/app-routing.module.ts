@@ -5,16 +5,17 @@ import { AppComponent } from './app.component';
 const routes: Routes = [
     {
         path: '',
-        redirectTo: 'home',
+        redirectTo: 'todo',
         pathMatch: 'full'
-    },
-    {
-        path: 'home',
-        loadChildren: './feature/dashboard/dashboard.module#DashboardModule'
     },
     {
         path: 'todo',
         loadChildren: './feature/todo/todo.module#TodoModule'
+    },
+    {
+        path: '**',
+        redirectTo: 'todo',
+        pathMatch: 'full'
     }
 ];
 

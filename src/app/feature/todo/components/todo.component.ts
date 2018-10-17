@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { GenericService } from 'src/app/core/service/generic.service';
 import { TodoService } from '../todo.service';
 import { TodoModel } from '../model/todo.model';

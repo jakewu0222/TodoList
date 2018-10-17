@@ -22,19 +22,17 @@ export class GenericService {
     }
 
     public static getColsByWindowWidth(width: number): number {
-        let cols = 4;
-        if (width < 510) {
+        let cols = 3;
+        if (width < 830) {
             cols = 1;
-        } else if (width >= 510 && width < 830) {
-            cols = 2;
         } else if (width >= 830 && width < 1255) {
-            cols = 3;
+            cols = 2;
         } else if (width >= 1255 && width < 1585) {
-            cols = 4;
+            cols = 3;
         } else if (width >= 1585 && width < 1995) {
-            cols = 5;
+            cols = 4;
         } else if (width >= 1995) {
-            cols = 6;
+            cols = 5;
         }
         return cols;
     }
