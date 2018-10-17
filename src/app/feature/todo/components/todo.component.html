@@ -17,17 +17,32 @@
         </mat-grid-tile>
         <mat-grid-tile>
             <button mat-button [class.selected]="sortBy.name==='modifiedAt'" (click)="changeSort('modifiedAt')">
-                modified time<mat-icon>swap_vert</mat-icon>
+                modified time
+                <mat-icon *ngIf="sortBy.name!=='modifiedAt'">swap_vert</mat-icon>
+                <mat-icon *ngIf="sortBy.name==='modifiedAt'">
+                    <span *ngIf="sortBy.order==='DESC'">arrow_drop_down</span>
+                    <span *ngIf="sortBy.order==='ASC'">arrow_drop_up</span>
+                </mat-icon>
             </button>
         </mat-grid-tile>
         <mat-grid-tile>
             <button mat-button [class.selected]="sortBy.name==='createAt'" (click)="changeSort('createAt')">
-                creation time<mat-icon>swap_vert</mat-icon>
+                creation time
+                <mat-icon *ngIf="sortBy.name!=='createAt'">swap_vert</mat-icon>
+                <mat-icon *ngIf="sortBy.name==='createAt'">
+                    <span *ngIf="sortBy.order==='DESC'">arrow_drop_down</span>
+                    <span *ngIf="sortBy.order==='ASC'">arrow_drop_up</span>
+                </mat-icon>
             </button>
         </mat-grid-tile>
         <mat-grid-tile>
             <button mat-button [class.selected]="sortBy.name==='progress'" (click)="changeSort('progress')">
-                progress<mat-icon>swap_vert</mat-icon>
+                progress
+                <mat-icon *ngIf="sortBy.name!=='progress'">swap_vert</mat-icon>
+                <mat-icon *ngIf="sortBy.name==='progress'">
+                    <span *ngIf="sortBy.order==='DESC'">arrow_drop_down</span>
+                    <span *ngIf="sortBy.order==='ASC'">arrow_drop_up</span>
+                </mat-icon>
             </button>
         </mat-grid-tile>
     </mat-grid-list>
