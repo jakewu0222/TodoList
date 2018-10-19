@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from 'src/environments/environment';
 
 @NgModule({
@@ -12,10 +13,10 @@ import { environment } from 'src/environments/environment';
         CommonModule,
         HttpClientModule,
         AngularFireModule.initializeApp(environment.firebaseConfig),
-        AngularFirestoreModule
+        AngularFirestoreModule,
+        AngularFireAuthModule
     ],
-    declarations: [
-    ]
+    declarations: []
 })
 export class CoreModule {
     static forRoot(): ModuleWithProviders {

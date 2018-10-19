@@ -5,6 +5,7 @@ import { TodoModel } from '../model/todo.model';
 import { OrderBy } from 'src/app/shared/model/shared-model';
 import { MatDialog } from '@angular/material';
 import { GenericDialogComponent } from 'src/app/shared/components/generic-dialog/generic-dialog.component';
+import { AuthorizeService } from 'src/app/authorize/service/authorize.service';
 
 @Component({
     selector: 'app-todo',
@@ -18,6 +19,7 @@ export class TodoComponent implements OnInit {
     isFormShow: boolean;
     sortBy: { name: string, order: OrderBy };
     constructor(
+        private _authorizeService: AuthorizeService,
         private _todoService: TodoService,
         private _dialog: MatDialog
     ) {
@@ -90,8 +92,8 @@ export class TodoComponent implements OnInit {
         );
     }
 
-    private onDeleteFail(todo: TodoModel) {
-        const dialogRef = this._dialog.open(GenericDialogComponent,
+    private onDeleteFail(todo: TodoModel): void {
+        this._dialog.open(GenericDialogComponent,
             {
                 width: '320px',
                 data: {
@@ -125,5 +127,9 @@ export class TodoComponent implements OnInit {
             default:
                 break;
         }
+    }
+
+    public logout(): void {
+        this._authorizeService.logout();
     }
 }

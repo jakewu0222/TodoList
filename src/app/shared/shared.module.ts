@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
-import {  CommonModule } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './material/material.module';
 import { GenericDialogComponent } from './components/generic-dialog/generic-dialog.component';
 
 @NgModule({
     imports: [
-        FormsModule,
         CommonModule,
+        FormsModule,
         ReactiveFormsModule,
         MaterialModule
     ],
