@@ -17,7 +17,6 @@ export class AuthorizeService {
     }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        console.log(this.user, this._auth.authState);
         if (this.user) {
             return true;
         } else {
@@ -36,9 +35,29 @@ export class AuthorizeService {
         return !isNullOrUndefined(this.user);
     }
 
-    public registerUser(email: string, password: string): void {
-        this._auth.auth.createUserWithEmailAndPassword(email, password).then(r => {
-            console.log(r);
+    public registerUser(email: string, password: string, displayName?: string): Observable<any> {
+        return Observable.create(observer => {
+            this._auth.auth.createUserWithEmailAndPassword(email, password).then(r => {
+                if (displayName) {
+                    const profile = {
+                        displayName: displayName,
+                        photoURL: ''
+                    };
+                    this._auth.auth.currentUser.updateProfile(profile).then(res => {
+                        observer.next(res);
+                        observer.complete();
+                    }, error => {
+                        observer.error(error);
+                        observer.complete();
+                    });
+                } else {
+                    observer.next(r);
+                    observer.complete();
+                }
+            }, error => {
+                observer.error(error);
+                observer.complete();
+            });
         });
     }
 
@@ -47,7 +66,6 @@ export class AuthorizeService {
     }
 
     public logout(): void {
-        console.log('logout');
         this._auth.auth.signOut().then(r => {
             this._router.navigateByUrl('login');
         });

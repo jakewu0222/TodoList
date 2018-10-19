@@ -64,32 +64,30 @@ export class TodoComponent implements OnInit {
     }
 
     public doDelete(todo: TodoModel): void {
-        const dialogRef = this._dialog.open(GenericDialogComponent,
-            {
-                width: '480px',
-                data: {
-                    title: 'Confirm to delete this todo?',
-                    content: `todo title "${todo.title}"`,
-                    buttons: [
-                        {
-                            text: 'CANCEL',
-                            click: () => dialogRef.close()
-                        },
-                        {
-                            text: 'CONFIRM',
-                            color: 'warn',
-                            click: () => {
-                                dialogRef.componentInstance.saving = true;
-                                this._todoService.deleteTodo(todo.id).subscribe(r => {
-                                    dialogRef.componentInstance.saving = false;
-                                    dialogRef.close();
-                                }, err => this.onDeleteFail(todo));
-                            }
+        const dialogRef = this._dialog.open(GenericDialogComponent, {
+            width: '480px',
+            data: {
+                title: 'Confirm to delete this todo?',
+                content: `todo title "${todo.title}"`,
+                buttons: [
+                    {
+                        text: 'CANCEL',
+                        click: () => dialogRef.close()
+                    },
+                    {
+                        text: 'CONFIRM',
+                        color: 'warn',
+                        click: () => {
+                            dialogRef.componentInstance.saving = true;
+                            this._todoService.deleteTodo(todo.id).subscribe(r => {
+                                dialogRef.componentInstance.saving = false;
+                                dialogRef.close();
+                            }, err => this.onDeleteFail(todo));
                         }
-                    ]
-                }
+                    }
+                ]
             }
-        );
+        });
     }
 
     private onDeleteFail(todo: TodoModel): void {
