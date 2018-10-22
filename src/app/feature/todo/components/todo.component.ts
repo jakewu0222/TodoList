@@ -79,7 +79,7 @@ export class TodoComponent implements OnInit {
                         color: 'warn',
                         click: () => {
                             dialogRef.componentInstance.saving = true;
-                            this._todoService.deleteTodo(todo.id).subscribe(r => {
+                            this._todoService.deleteTodo(todo).subscribe(r => {
                                 dialogRef.componentInstance.saving = false;
                                 dialogRef.close();
                             }, err => this.onDeleteFail(todo));

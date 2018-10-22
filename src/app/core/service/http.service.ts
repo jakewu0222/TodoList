@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from 'angularfire2/firestore';
+import { AngularFirestore, QueryFn } from 'angularfire2/firestore';
 import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
@@ -22,8 +22,12 @@ export class HttpService {
      * @param url
      */
 
-    public getCollection<T>(url: string): Observable<Array<T>> {
-        return this._db.collection<T>(url).valueChanges();
+    public getCollection<T>(url: string, queryFn?: QueryFn): Observable<Array<T>> {
+        if (queryFn) {
+            return this._db.collection<T>(url, queryFn).valueChanges();
+        } else {
+            return this._db.collection<T>(url).valueChanges();
+        }
     }
 
     public getDoc<T>(url: string): Observable<T> {

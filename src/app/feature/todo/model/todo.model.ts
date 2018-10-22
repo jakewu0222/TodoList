@@ -15,7 +15,7 @@ export class TodoModel {
         this.category = todo.category || null;
         this.status = todo.status || 0;
         this.progress = todo.progress || 0;
-        this.userId = todo.userId || 'jake.wu';
+        this.userId = 'anonymous';
     }
 }
 
