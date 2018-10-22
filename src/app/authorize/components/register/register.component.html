@@ -20,7 +20,7 @@
                 </mat-form-field>
                 <mat-form-field>
                     <input matInput type="password" placeholder="Password" autocomplete="off" [formControl]="password"
-                        (keydown.enter)="login()">
+                        (keydown.enter)="register()">
                     <mat-error *ngIf="password?.errors">
                         <span *ngIf="password?.errors?.required">required</span>
                     </mat-error>
