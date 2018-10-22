@@ -126,8 +126,4 @@ export class TodoComponent implements OnInit {
                 break;
         }
     }
-
-    public logout(): void {
-        this._authorizeService.logout();
-    }
 }

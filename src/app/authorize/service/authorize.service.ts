@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { from, Observable } from 'rxjs';
+import { from, Observable, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { isNullOrUndefined } from 'util';
 
@@ -9,10 +9,13 @@ import { isNullOrUndefined } from 'util';
     providedIn: 'root'
 })
 export class AuthorizeService {
-    public user: any;
+    private user: any;
+    public onUserChanged: BehaviorSubject<any>;
     constructor(private _router: Router, private _auth: AngularFireAuth) {
+        this.onUserChanged = new BehaviorSubject(null);
         this._auth.auth.onAuthStateChanged(user => {
             this.user = user;
+            this.onUserChanged.next(user);
         });
     }
 
