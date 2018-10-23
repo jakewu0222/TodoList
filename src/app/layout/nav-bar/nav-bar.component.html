@@ -1,4 +1,4 @@
-<div class="nav-container" *ngIf="user">
+<div class="nav-container" *ngIf="user && !isBlock">
     <span class="display-name">Hello, {{ displayName }}</span>
     <button mat-button class="btn-logout" (click)="logout()">Logout</button>
 </div>

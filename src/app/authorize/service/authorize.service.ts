@@ -47,17 +47,21 @@ export class AuthorizeService {
                         photoURL: ''
                     };
                     this._auth.auth.currentUser.updateProfile(profile).then(res => {
+                        this.logout(false);
                         observer.next(res);
                         observer.complete();
                     }, error => {
+                        this.logout(false);
                         observer.error(error);
                         observer.complete();
                     });
                 } else {
+                    this.logout(false);
                     observer.next(r);
                     observer.complete();
                 }
             }, error => {
+                this.logout(false);
                 observer.error(error);
                 observer.complete();
             });
@@ -68,9 +72,11 @@ export class AuthorizeService {
         return from(this._auth.auth.signInWithEmailAndPassword(email, password));
     }
 
-    public logout(): void {
+    public logout(withRedirectTo = true): void {
         this._auth.auth.signOut().then(r => {
-            this._router.navigateByUrl('login');
+            if (withRedirectTo) {
+                this._router.navigateByUrl('login');
+            }
         });
     }
 }
